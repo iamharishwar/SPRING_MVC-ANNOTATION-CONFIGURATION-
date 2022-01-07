@@ -1,0 +1,55 @@
+
+<---------------------------------both the files  below are classes ------------------------------------------------------>
+<----------------------------------------------in place of diapatchservelet----------------------------------------------->
+                                             Configclaz.class is name of class
+
+package com.config;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+public class Webconfig extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[0];
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{Configclaz.class};
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"} ;
+    }
+}
+
+
+
+<-----------------------------------------------------------------------------in place of web.xml------------------------------------>
+                         "com.config","com.springmvc" are the packages where informtion of files which i want to put on browser are present 
+
+
+package com.config;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan({"com.config","com.springmvc"})
+
+public class Configclaz{
+
+    @Bean
+    public InternalResourceViewResolver viewResolver(){
+        InternalResourceViewResolver vr = new InternalResourceViewResolver();
+        vr.setPrefix("/WEB-INF/");
+        vr.setSuffix(".jsp");
+        return vr;
+    }
+}
+
+
+
+
+
